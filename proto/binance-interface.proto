@@ -3,20 +3,44 @@ package dummy;
 
 import "google/api/annotations.proto";
 
-service HelloService {
-  rpc SayHello(HelloRequest) returns (HelloReply) {
-    option (google.api.http) = {
-      post: "/v1/say_hello"
-      body: "*"
-    };
-  }
+message GetKlinesRequest {
+  string symbol = 1;        // for our use it's prob gonna be "EURETH"
+  string interval = 2;      // "15m"
+  int64 start_time = 3;     // UNIX timestamp in milliseconds (optional)
+  int64 end_time = 4;       // UNIX timestamp in milliseconds (optional)
 }
 
-message HelloRequest {
-  string name = 1;
+message GetKlinesResponse {
+  repeated Kline klines = 1;
 }
 
-message HelloReply {
-  string message = 1;
+message Kline {
+  int64 open_time = 1;
+  double open = 2;
+  double high = 3;
+  double low = 4;
+  double close = 5;
+  double volume = 6;
+  int64 close_time = 7;
+  double quote_asset_volume = 8;
+  int32 number_of_trades = 9;
+  double taker_buy_base_volume = 10;
+  double taker_buy_quote_volume = 11;
 }
 
+message GetSingleKlineRequest {
+  string symbol = 1;
+  string interval = 2;
+  int64 timestamp = 3; // Optional
+}
+
+message GetSingleKlineResponse {
+  Kline kline = 1;
+}
+
+
+service BinanceData {
+  rpc GetKlines (GetKlinesRequest) returns (GetKlinesResponse);
+
+  rpc GetSingleKline (GetSingleKlineRequest) returns (GetSingleKlineResponse);
+}
