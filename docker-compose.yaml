@@ -7,6 +7,13 @@ services:
     networks:
       - backend
 
+  binance-interface:
+    build: ./services/binance-interface
+    ports:
+      - "50052:50052"
+    networks:
+      - backend
+
   openresty:
     build: ./openresty
     ports:

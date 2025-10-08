@@ -1,5 +1,5 @@
 syntax = "proto3";
-package dummy;
+package binance_interface;
 
 import "google/api/annotations.proto";
 
