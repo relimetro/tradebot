@@ -2,3 +2,7 @@ googleapis-common-protos
 grpcio
 grpcio-tools
 grpcio-reflection
+python-binance
+requests
+python-dateutil
+pytz
