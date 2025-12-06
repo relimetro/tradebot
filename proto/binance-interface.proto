@@ -39,6 +39,7 @@ message GetSingleKlineResponse {
 }
 
 
+
 service BinanceData {
   rpc GetKlines (GetKlinesRequest) returns (GetKlinesResponse);
 
