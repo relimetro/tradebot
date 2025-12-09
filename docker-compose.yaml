@@ -9,9 +9,20 @@ services:
     environment:
       BINANCE_API_KEY: ${BINANCE_API_KEY}
       BINANCE_API_SECRET: ${BINANCE_API_SECRET}
+      PYTHONUNBUFFERED: 1
+
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
+
+  controller:
+    build: ./services/controller
+    ports:
+      - "50061:50061"
+    networks:
+      - backend
+    environment:
+      - PYTHONUNBUFFERED=1
 
   openresty:
     build: ./openresty
@@ -21,16 +32,21 @@ services:
       - ./openresty/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
     networks:
       - backend
+    security_opt: 
+      - label:disable
 
   envoy:
     image: envoyproxy/envoy:v1.31-latest
     volumes:
       - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml
       - ./services/dummy/dummy.pb:/services/dummy.pb
+      - ./services/controller/controller.pb:/services/controller.pb
     ports:
       - "8080:8080"
     networks:
       - backend
+    security_opt: 
+      - label:disable
 
   mongo: 
     image: mongo:6 
@@ -40,6 +56,8 @@ services:
       - mongo-data:/data/db
     networks:
       - backend
+    security_opt: 
+      - label:disable
 
 networks:
   backend:

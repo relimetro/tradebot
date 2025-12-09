@@ -13,3 +13,15 @@ sudo docker compose -p tradebot up --build -d
 grpcurl -plaintext -d '{ "symbol": "BTCUSDT", "interval": "1m", "start_time": 1728000000000, "end_time": 1728086400000 }' localhost:50052 binance_interface.BinanceData.GetKlines
 grpcurl -plaintext -d '{ "symbol": "ETHUSDT", "interval": "5m", "timestamp": 1728086400000 }' localhost:50052 binance_interface.BinanceData.GetSingleKline
 ```
+
+
+*access mongodb*
+docker exec -it <mongoID> mongosh
+
+
+
+# API (port 80)
+getPrediction prediction (str)
+getFeatures list(data)
+
+

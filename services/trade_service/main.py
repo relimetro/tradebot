@@ -223,7 +223,7 @@ def fetch_latest_kline():
 
     save_prediction_to_db(prediction, timestamp)
 
-    execute_trade(prediction, close_price)
+    # execute_trade(prediction, close_price)
 
     col_klines.update_one({"Open time": row["Open time"]}, {"$set": row}, upsert=True)
 

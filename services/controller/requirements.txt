@@ -1,0 +1,7 @@
+grpcio
+grpcio-tools
+grpcio-reflection
+firebase-admin
+requests
+protobuf
+pymongo

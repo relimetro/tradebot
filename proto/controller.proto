@@ -1,0 +1,60 @@
+syntax = "proto3";
+package Controller;
+
+import "google/api/annotations.proto";
+
+service Controller {
+  rpc Test (TestRequest) returns (TestResponse) {
+    option (google.api.http) = {
+      post: "/v1/test"
+      body: "*"
+    };
+  }
+
+  rpc GetPrediction (Empty) returns (PredictionResponse){
+    option (google.api.http) = {
+      post: "/v1/GetPrediction"
+      body: "*"
+    };
+  }
+
+  rpc GetFeatures (Empty) returns (FeaturesResponse){
+    option (google.api.http) = {
+      post: "/v1/GetFeatures"
+      body: "*"
+    };
+  }
+
+}
+
+
+message FeaturesResponse {
+  repeated data data = 1;
+}
+
+message data { 
+  string High = 1;
+	string Open = 2;
+	string Close = 3;
+	string avg_true_range_14 = 4;
+	string momentum_48h = 5;
+	string rolling_return_mean_24 = 6;
+	string BB_width = 7;
+	string ema_24 = 8;
+	string MACD = 9;
+	string BB_middle = 10;
+}
+
+message TestRequest {
+  string test = 1;
+}
+message TestResponse {
+  string out = 1;
+}
+
+message Empty {}
+
+message PredictionResponse {
+  string prediction = 1;
+}
+
