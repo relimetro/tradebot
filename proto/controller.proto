@@ -18,6 +18,13 @@ service Controller {
     };
   }
 
+  rpc GetPredictions (Empty) returns (PredictionsResponse){
+    option (google.api.http) = {
+      post: "/v1/GetPredictions"
+      body: "*"
+    };
+  }
+
   rpc GetFeatures (Empty) returns (FeaturesResponse){
     option (google.api.http) = {
       post: "/v1/GetFeatures"
@@ -56,5 +63,9 @@ message Empty {}
 
 message PredictionResponse {
   string prediction = 1;
+}
+
+message PredictionsResponse {
+  repeated PredictionResponse data = 1;
 }
 

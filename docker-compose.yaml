@@ -30,6 +30,7 @@ services:
       - 80:80
     volumes:
       - ./openresty/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
+      - ./services/frontend/:/frontend/
     networks:
       - backend
     security_opt: 

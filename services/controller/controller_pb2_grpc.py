@@ -44,6 +44,11 @@ class ControllerStub(object):
                 request_serializer=controller__pb2.Empty.SerializeToString,
                 response_deserializer=controller__pb2.PredictionResponse.FromString,
                 _registered_method=True)
+        self.GetPredictions = channel.unary_unary(
+                '/Controller.Controller/GetPredictions',
+                request_serializer=controller__pb2.Empty.SerializeToString,
+                response_deserializer=controller__pb2.PredictionsResponse.FromString,
+                _registered_method=True)
         self.GetFeatures = channel.unary_unary(
                 '/Controller.Controller/GetFeatures',
                 request_serializer=controller__pb2.Empty.SerializeToString,
@@ -61,6 +66,12 @@ class ControllerServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetPrediction(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetPredictions(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -84,6 +95,11 @@ def add_ControllerServicer_to_server(servicer, server):
                     servicer.GetPrediction,
                     request_deserializer=controller__pb2.Empty.FromString,
                     response_serializer=controller__pb2.PredictionResponse.SerializeToString,
+            ),
+            'GetPredictions': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPredictions,
+                    request_deserializer=controller__pb2.Empty.FromString,
+                    response_serializer=controller__pb2.PredictionsResponse.SerializeToString,
             ),
             'GetFeatures': grpc.unary_unary_rpc_method_handler(
                     servicer.GetFeatures,
@@ -145,6 +161,33 @@ class Controller(object):
             '/Controller.Controller/GetPrediction',
             controller__pb2.Empty.SerializeToString,
             controller__pb2.PredictionResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetPredictions(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/Controller.Controller/GetPredictions',
+            controller__pb2.Empty.SerializeToString,
+            controller__pb2.PredictionsResponse.FromString,
             options,
             channel_credentials,
             insecure,

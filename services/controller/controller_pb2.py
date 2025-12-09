@@ -25,7 +25,7 @@ _sym_db = _symbol_database.Default()
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x10\x63ontroller.proto\x12\nController\x1a\x1cgoogle/api/annotations.proto\"2\n\x10\x46\x65\x61turesResponse\x12\x1e\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x10.Controller.data\"\xc5\x01\n\x04\x64\x61ta\x12\x0c\n\x04High\x18\x01 \x01(\t\x12\x0c\n\x04Open\x18\x02 \x01(\t\x12\r\n\x05\x43lose\x18\x03 \x01(\t\x12\x19\n\x11\x61vg_true_range_14\x18\x04 \x01(\t\x12\x14\n\x0cmomentum_48h\x18\x05 \x01(\t\x12\x1e\n\x16rolling_return_mean_24\x18\x06 \x01(\t\x12\x10\n\x08\x42\x42_width\x18\x07 \x01(\t\x12\x0e\n\x06\x65ma_24\x18\x08 \x01(\t\x12\x0c\n\x04MACD\x18\t \x01(\t\x12\x11\n\tBB_middle\x18\n \x01(\t\"\x1b\n\x0bTestRequest\x12\x0c\n\x04test\x18\x01 \x01(\t\"\x1b\n\x0cTestResponse\x12\x0b\n\x03out\x18\x01 \x01(\t\"\x07\n\x05\x45mpty\"(\n\x12PredictionResponse\x12\x12\n\nprediction\x18\x01 \x01(\t2\x9a\x02\n\nController\x12N\n\x04Test\x12\x17.Controller.TestRequest\x1a\x18.Controller.TestResponse\"\x13\x82\xd3\xe4\x93\x02\r\"\x08/v1/test:\x01*\x12`\n\rGetPrediction\x12\x11.Controller.Empty\x1a\x1e.Controller.PredictionResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\"\x11/v1/GetPrediction:\x01*\x12Z\n\x0bGetFeatures\x12\x11.Controller.Empty\x1a\x1c.Controller.FeaturesResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\"\x0f/v1/GetFeatures:\x01*b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x10\x63ontroller.proto\x12\nController\x1a\x1cgoogle/api/annotations.proto\"2\n\x10\x46\x65\x61turesResponse\x12\x1e\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x10.Controller.data\"\xc5\x01\n\x04\x64\x61ta\x12\x0c\n\x04High\x18\x01 \x01(\t\x12\x0c\n\x04Open\x18\x02 \x01(\t\x12\r\n\x05\x43lose\x18\x03 \x01(\t\x12\x19\n\x11\x61vg_true_range_14\x18\x04 \x01(\t\x12\x14\n\x0cmomentum_48h\x18\x05 \x01(\t\x12\x1e\n\x16rolling_return_mean_24\x18\x06 \x01(\t\x12\x10\n\x08\x42\x42_width\x18\x07 \x01(\t\x12\x0e\n\x06\x65ma_24\x18\x08 \x01(\t\x12\x0c\n\x04MACD\x18\t \x01(\t\x12\x11\n\tBB_middle\x18\n \x01(\t\"\x1b\n\x0bTestRequest\x12\x0c\n\x04test\x18\x01 \x01(\t\"\x1b\n\x0cTestResponse\x12\x0b\n\x03out\x18\x01 \x01(\t\"\x07\n\x05\x45mpty\"(\n\x12PredictionResponse\x12\x12\n\nprediction\x18\x01 \x01(\t\"C\n\x13PredictionsResponse\x12,\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x1e.Controller.PredictionResponse2\xff\x02\n\nController\x12N\n\x04Test\x12\x17.Controller.TestRequest\x1a\x18.Controller.TestResponse\"\x13\x82\xd3\xe4\x93\x02\r\"\x08/v1/test:\x01*\x12`\n\rGetPrediction\x12\x11.Controller.Empty\x1a\x1e.Controller.PredictionResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\"\x11/v1/GetPrediction:\x01*\x12\x63\n\x0eGetPredictions\x12\x11.Controller.Empty\x1a\x1f.Controller.PredictionsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\"\x12/v1/GetPredictions:\x01*\x12Z\n\x0bGetFeatures\x12\x11.Controller.Empty\x1a\x1c.Controller.FeaturesResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\"\x0f/v1/GetFeatures:\x01*b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -36,6 +36,8 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_CONTROLLER'].methods_by_name['Test']._serialized_options = b'\202\323\344\223\002\r\"\010/v1/test:\001*'
   _globals['_CONTROLLER'].methods_by_name['GetPrediction']._loaded_options = None
   _globals['_CONTROLLER'].methods_by_name['GetPrediction']._serialized_options = b'\202\323\344\223\002\026\"\021/v1/GetPrediction:\001*'
+  _globals['_CONTROLLER'].methods_by_name['GetPredictions']._loaded_options = None
+  _globals['_CONTROLLER'].methods_by_name['GetPredictions']._serialized_options = b'\202\323\344\223\002\027\"\022/v1/GetPredictions:\001*'
   _globals['_CONTROLLER'].methods_by_name['GetFeatures']._loaded_options = None
   _globals['_CONTROLLER'].methods_by_name['GetFeatures']._serialized_options = b'\202\323\344\223\002\024\"\017/v1/GetFeatures:\001*'
   _globals['_FEATURESRESPONSE']._serialized_start=62
@@ -50,6 +52,8 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_EMPTY']._serialized_end=379
   _globals['_PREDICTIONRESPONSE']._serialized_start=381
   _globals['_PREDICTIONRESPONSE']._serialized_end=421
-  _globals['_CONTROLLER']._serialized_start=424
-  _globals['_CONTROLLER']._serialized_end=706
+  _globals['_PREDICTIONSRESPONSE']._serialized_start=423
+  _globals['_PREDICTIONSRESPONSE']._serialized_end=490
+  _globals['_CONTROLLER']._serialized_start=493
+  _globals['_CONTROLLER']._serialized_end=876
 # @@protoc_insertion_point(module_scope)

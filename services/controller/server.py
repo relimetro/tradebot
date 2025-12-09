@@ -4,7 +4,6 @@ from concurrent import futures
 import requests
 from grpc_reflection.v1alpha import reflection
 import datetime
-import traceback
 
 from pymongo import MongoClient
 
@@ -12,7 +11,6 @@ import controller_pb2
 import controller_pb2_grpc
 
 
-feature_cols = ["High", "Open", "Close", "avg_true_range_14", "momentum_48h", "rolling_return_mean_24", "BB_width", "ema_24", "MACD", "BB_middle"]
 
 class Controller(controller_pb2_grpc.ControllerServicer):
 	def Test(self, request, context):
@@ -31,16 +29,14 @@ class Controller(controller_pb2_grpc.ControllerServicer):
 				val = 0
 
 				for x in pred.find():
-					## dt = datetime.date(x["datetime"].split("T")[0])
 					dt = x["datetime"]
-					print(type(dt))
 					v = x["prediction"]
 					if latest == None or dt > latest :
 						latest = dt
 						val = v
 				print(val)
 				return controller_pb2.PredictionResponse(
-					prediction=f"{val}")
+					prediction=str(val) )
 		except Exception as e : print(e)
 
 
@@ -51,10 +47,8 @@ class Controller(controller_pb2_grpc.ControllerServicer):
 				db = mongo["market_data"]
 				klines = db["klines"]
 
-				# out = []
 				out = controller_pb2.FeaturesResponse()
 
-				print("start")
 				for x in klines.find(limit=10):
 					out.data.add(
 							High = str(x["High"]),
@@ -68,14 +62,22 @@ class Controller(controller_pb2_grpc.ControllerServicer):
 							MACD = str(x["MACD"]),
 							BB_middle = str(x["BB_middle"])
 							)
-				print("done")
 				return out
-				# return controller_pb2.FeaturesResponse(
-					# data=out)
-		except Exception as e :
-			print(e)
-			traceback.print_exec()
+		except Exception as e : print(e)
 
+	def GetPredictions(self,request,context):
+		try:
+			print("get predictions")
+			with MongoClient("mongodb://mongo:27017") as mongo:
+				db = mongo["market_data"]
+				pred = db["predictions"]
+
+				out = controller_pb2.PredictionsResponse()
+
+				for x in pred.find(limit=20):
+					out.data.add( prediction = str(x["prediction"]),)
+				return out
+		except Exception as e : print(e)
 
 
 
