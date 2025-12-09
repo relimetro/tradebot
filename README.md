@@ -1,5 +1,8 @@
 # tradebot
 
+# website
+localhost:80/site/index.html
+
 # build and run
 ```
 sudo docker compose -p tradebot up --build -d
@@ -16,12 +19,17 @@ grpcurl -plaintext -d '{ "symbol": "ETHUSDT", "interval": "5m", "timestamp": 172
 
 
 *access mongodb*
-docker exec -it <mongoID> mongosh
-
+`docker exec -it <mongoID> mongosh`
 
 
 # API (port 80)
 getPrediction prediction (str)
 getFeatures list(data)
+
+# requirements
+.env file with
+BINANCE_API_KEY='xxx'
+BINANCE_API_SECRET='xxx'
+
 
 

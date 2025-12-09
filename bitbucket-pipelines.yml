@@ -1,0 +1,38 @@
+# This is an example Starter pipeline configuration
+# Use a skeleton to build, test and deploy using manual and parallel steps
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+
+image: atlassian/default-image:3
+
+options:
+  docker: true
+definitions:
+  services:
+    docker:
+      memory: 3072
+
+pipelines:
+  default:
+    - step:
+        name: 'Build and Test'
+        script:
+          - ls
+          - mkdir build
+          - docker-compose -f docker-compose.yaml build
+          - docker image list
+          - docker save build_binance-interface > build/binance-interface.tar
+          - docker save build_controller > build/controller.tar
+          - ls
+          - ls build/
+        artifacts:
+          - build/*
+    - step :
+        name: 'Save Artifacts'
+        script:
+          - pipe: atlassian/bitbucket-upload-file:0.7.5
+            variables:
+              FILENAME: build/controller.tar
+              BITBUCKET_ACCESS_TOKEN: <redacted>
+
+
