@@ -1,0 +1,9 @@
+pandas
+numpy
+pymongo
+python-binance
+xgboost
+scikit-learn
+schedule
+pytz
+
